@@ -7,11 +7,11 @@ function [Korrespondenzen_robust] = F_ransac(Korrespondenzen,varargin)
 
 	% Liste der optionalen Parameter
 	% Die gesch??tzte Wahrscheilichkeit
-	P.addOptional('epsilon', 0.9, @isnumeric)
+	P.addOptional('epsilon', 0.5, @isnumeric)
 	% Die gew??nschte Wahscheilichkeit
-	P.addOptional('p', 0.9, @isnumeric);
+	P.addOptional('p', 0.5, @isnumeric);
 	% Das Toleranzma??
-	P.addOptional('tolerance',0.9, @isnumeric);
+	P.addOptional('tolerance',10e4, @isnumeric);
 
 	% Lese den Input
 	P.parse(varargin{:});
@@ -42,9 +42,11 @@ function [Korrespondenzen_robust] = F_ransac(Korrespondenzen,varargin)
 			dist = distSampson(x1, x2, E, e3);
 
 			if dist > tolerance
-				sumDist = sumDist + dist;
 				ifAccept = false;
 				break;
+			else
+				sumDist = sumDist + dist;
+			end
 		end
 
 		if ifAccept && sumDist < minSum
@@ -53,5 +55,6 @@ function [Korrespondenzen_robust] = F_ransac(Korrespondenzen,varargin)
 		end
 
 	end
+	Korrespondenzen_robust	= bestKorr;
 
 end

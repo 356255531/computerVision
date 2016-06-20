@@ -29,13 +29,11 @@ Korrespondenzen = punkt_korrespondenzen(IGray1,IGray2,Merkmale1,Merkmale2,'min_c
 zeit_korrespondenzen = toc;
 disp(['Es wurden ' num2str(size(Korrespondenzen,2)) ' Korrespondenzpunktpaare in ' num2str(zeit_korrespondenzen) 's gefunden.'])
 
-
-
 %% Finde robuste Korrespondenzpunktpaare mit Hilfe des RANSAC-Algorithmus 
 Korrespondenzen_robust = F_ransac(Korrespondenzen);
 
 
 %% Berechnung der Essentiellen Matrix
-%load('K.mat');
-%E = achtpunktalgorithmus(Korrespondenzen_robust,K);
+load('K.mat');
+E = achtpunktalgorithmus(Korrespondenzen_robust,K);
 
