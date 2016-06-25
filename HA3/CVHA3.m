@@ -1,5 +1,5 @@
-%  Gruppennummer:
-%  Gruppenmitglieder:
+%  Gruppennummer: M12
+%  Gruppenmitglieder: Mengyu Liang, Zhiwei Han, Julia Stoettner, Sebastian Schneider
 
 %% Hausaufgabe 3
 %  Bestimmung von robusten Korrespondenzpunktpaaren mittels RANSAC und
