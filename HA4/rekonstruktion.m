@@ -13,5 +13,5 @@ function [T,R, lambdas, P1] = rekonstruktion(T1,T2,R1,R2, Korrespondenzen, K)
 		T = T2;
 		R = R2;
         P1 = P12;
-	end
+    end
 end

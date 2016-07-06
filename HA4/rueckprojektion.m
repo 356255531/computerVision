@@ -4,12 +4,22 @@ function repro_error = rueckprojektion(Korrespondenzen, P1, I2, T, R, K)
 P1Homo = [P1;ones(1, size(P1, 2))];
 P2Homo = [R, T;zeros(1, size(R, 2)), 1] * P1Homo;
 
-newKorrespondenzen = [Korrespondenzen(3:4, :);Korrespondenzen(1:2, :)];
-E = achtpunktalgorithmus(newKorrespondenzen, K);
-[T1,R1,T2,R2] = TR_aus_E(E);
-[~, ~, lambda, ~] = rekonstruktion(T1,T2,R1,R2,newKorrespondenzen,K);
-P2App = P2Homo(1:3, :);
-P2Pro = reshape(P2App(:) ./ kron(lambda, [1,1,1]'), [3, size(P2App, 2)]);
-x2Pro = K * P2Pro;
+x2Pro = K * [1 0 0 0;0 1 0 0;0 0 1 0] * P2Homo;
+
+for i = 1 : size(x2Pro, 2)
+	x2Pro(1:2, i) = x2Pro(1:2, i) / x2Pro(3, i);
+end
+
+x2BildKorrApp = x2Pro(1:2, :);
+x2BildKorr = Korrespondenzen(3:4, :);
+repro_error = mean(sqrt(sum((x2BildKorr - x2BildKorrApp) .^ 2)));
+
+x2BildKorrApp = int16(x2BildKorrApp);
+x2BildKorr = int16(x2BildKorr);
+imshow(I2);
 hold on;
+scatter(x2BildKorr(1, :)', x2BildKorr(2, :)','+');
+hold on;
+scatter(x2BildKorrApp(1, :)', x2BildKorrApp(2, :)','*');
+display(repro_error);
 end

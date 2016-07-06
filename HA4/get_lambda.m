@@ -29,6 +29,7 @@ function [lambda, P] = get_lambda(Korrespondenzen, R, T, K)
     d = V(:, end);
     lambda = d(1:end - 1);
 	gamma = d(end);
+	lambda = lambda / gamma;
 	P = reshape(kron(lambda, [1,1,1]') .* x1(:), [3, size(x1, 2)]);
 end
 %% get_dach: get dach matrix expression

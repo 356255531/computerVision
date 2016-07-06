@@ -66,4 +66,3 @@ disp(E);
 %% Berechnung des mittleren R?ckprojektionsfehlers auf der Bildebene von Kamera 2
 repro_error = rueckprojektion(Korrespondenzen_robust, P1, IGray2, T, R, K);
 
-
